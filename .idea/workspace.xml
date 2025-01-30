@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd42a98b-ef5f-4bee-8521-ddd52ea3b34e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/personal_fitnes_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/personal_fitnes_tracker.py" afterDir="false" />
-    </list>
+    <list default="true" id="dd42a98b-ef5f-4bee-8521-ddd52ea3b34e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
