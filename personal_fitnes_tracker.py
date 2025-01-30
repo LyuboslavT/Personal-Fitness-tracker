@@ -1,9 +1,5 @@
 # Personal Fitness Tracker System 🏋️‍♂️
 
-# importing libraries for the GUI
-import tkinter as tk
-from tkinter import messagebox
-
 # importing libs for the main function logic
 from functools import total_ordering
 
@@ -48,7 +44,7 @@ def view_progress():
     - Print motivational feedback.
     """
     total_time = sum(duration for _, duration in workouts)
-    total_calories_burned = sum(calories)
+    total_calories_taken = sum(calories)
 
     """
     Longer type of view progress solution below as a comment
@@ -63,14 +59,7 @@ def view_progress():
     """
 
 
-    if total_time <= 30:
-        return f"Keep going! You need to be more active {total_time} minutes, {total_calories_burned} calories burned"
-
-    elif total_time <= 60:
-        return f"Great Job, Yoe are keeping up the good progress {total_time} minutes, {total_calories_burned} calories burned"
-
-    else:
-        return f"Amazing effort! You are on fire today! {total_time} minutes, {total_calories_burned} calories burned"
+    return total_time, total_calories_taken
 
 
 
@@ -85,23 +74,57 @@ def reset_progress():
 
     return "Workout Log and Calories Log are empty!"
 
-# TODO: create a daily gaol entry!
+
 def set_daily_goals(workout_minutes, calorie_limit):
     """
     Set daily goals for workout time and calorie intake.
     - Update the global variables workout_goal and calorie_goal.
     - Print a confirmation message.
     """
-    pass
+    global workout_goal, calorie_goal
 
-# TODO: compare progress with daily goals and create encouragement messages!
+    workout_goal = workout_minutes
+    calorie_goal = calorie_limit
+
+    return workout_goal, calorie_goal
+
+
 def encouragement_system():
     """
     Provide motivational feedback based on progress and goals.
     - Compare current totals to the daily goals.
     - Print encouragement messages.
     """
-    pass
+
+    global  workout_goal, calorie_goal
+
+    total_time, total_calories_taken = view_progress()
+
+    if total_time < workout_goal:
+        return f"Keep going! You need to be more active\nYour GOAL is {workout_goal}, You need to push {workout_goal - total_time} minutes more!"
+
+    elif total_time <= 30 and total_calories_taken > 1500:
+        return f"Poor performance {total_time} minutes, Your Goal is {workout_goal}.\nYou eat a lot with {total_calories_taken}.\n Get you lazy ass up and go to the gym.\nYou need to stay active for at least {workout_goal} minutes."
+
+    elif total_calories_taken < calorie_goal:
+        return f'You need to eat more on a daily base. Your GOAL is {calorie_goal}.\nYou need {calorie_goal - total_calories_taken} calories more, to have energy for your workout'
+
+    elif total_time >= workout_goal:
+        return "Amazing You have reached your daily workout GOAL!"
+
+    elif total_calories_taken == calorie_goal:
+        return "Amazing You have reached your daily calories intake GOAL!"
+
+    elif total_time >= workout_goal and total_calories_taken == calorie_goal:
+        return "Amazing You have reached all of your GOALS!"
+
+    elif total_calories_taken > calorie_goal:
+        return "You are FAT. Keep your goals fulfilled!"
+
+    elif total_time > workout_goal:
+        return "Amazing You have overfilled your daily workout GOAL!"
+
+
 
 
 def main():
@@ -127,17 +150,22 @@ def main():
             print(log_workout(workout_type=input("Enter your workout type: "), duration=int(input("Enter duration time: "))))
         elif choice == '2':
             # Prompt for calories consumed
-            print(log_calorie_intake(calories_consumed=float(input("Enter Calories consumption: "))))
+            print(log_calorie_intake(calories_consumed=int(input("Enter Calories consumption: "))))
         elif choice == '3':
             # Call view_progress function
             print(view_progress())
+            print(encouragement_system())
         elif choice == '4':
             # Call reset_progress function
             reset_progress()
 
         elif choice == '5':
             # Prompt for daily goals
-            pass
+            set_workout_minutes = int(input("Enter daily workout target in minutes: "))
+            set_calories_limit = int(input('Enter daily calories intake limit: '))
+            print(set_daily_goals(set_workout_minutes, set_calories_limit))
+            print("Goals set successfully!")
+
         elif choice == '6':
             # Print a goodbye message and break the loop
             print("Thank you for using the Fitness Tracker. Stay healthy! 💪")
@@ -145,40 +173,6 @@ def main():
         else:
             print("Invalid choice, please try again.")
 
-
-#TODO: Create a GUI for the tracker!
-
-# root = tk.Tk()
-# root.title("Fitness Tracker")
-#
-# # Workout input fields
-# tk.Label(root, text="Workout Type:").grid(row=0, column=0)
-# workout_entry = tk.Entry(root)
-# workout_entry.grid(row=0, column=1)
-#
-# tk.Label(root, text="Duration (min):").grid(row=1, column=0)
-# duration_entry = tk.Entry(root)
-# duration_entry.grid(row=1, column=1)
-#
-# tk.Button(root, text="Log Workout", command=log_workout(workout_type=input(), duration=int(input()))).grid(row=2, column=0, columnspan=2)
-#
-# # Calorie input field
-# tk.Label(root, text="Calories Consumed:").grid(row=3, column=0)
-# calories_entry = tk.Entry(root)
-# calories_entry.grid(row=3, column=1)
-#
-# tk.Button(root, text="Log Calories", command=log_calorie_intake).grid(row=4, column=0, columnspan=2)
-#
-# # Listbox to display workouts
-# tk.Label(root, text="Workout History:").grid(row=5, column=0)
-# workout_listbox = tk.Listbox(root, height=5, width=30)
-# workout_listbox.grid(row=6, column=0, columnspan=2)
-#
-# # View progress button
-# tk.Button(root, text="View Progress", command=view_progress).grid(row=7, column=0, columnspan=2)
-#
-# # Run the Tkinter event loop
-# root.mainloop()
 
 
 if __name__ == "__main__":
