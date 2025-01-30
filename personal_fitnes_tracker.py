@@ -1,8 +1,10 @@
 # Personal Fitness Tracker System 🏋️‍♂️
+from functools import total_ordering
 
 # Lists to store fitness data
 workouts = []  # To store workout types and durations
 calories = []  # To store calorie intake for meals
+progres = [] # To store the whole duration of all workouts
 
 # Variables for daily goals
 workout_goal = 0  # Daily workout goal in minutes
@@ -15,8 +17,8 @@ def log_workout(workout_type, duration):
     - Append the workout type and duration to the workouts list.
     - Print a confirmation message.
     """
-    pass
-
+    workouts.append((workout_type, duration))
+    return "Log completed!"
 
 def log_calorie_intake(calories_consumed):
     """
@@ -24,8 +26,8 @@ def log_calorie_intake(calories_consumed):
     - Append the calorie amount to the calories list.
     - Print a confirmation message.
     """
-    pass
-
+    calories.append(calories_consumed)
+    return "Log Completed!"
 
 def view_progress():
     """
@@ -33,7 +35,32 @@ def view_progress():
     - Calculate the total workout time and total calories.
     - Print motivational feedback.
     """
-    pass
+    total_time = sum(duration for _, duration in workouts)
+    total_calories_burned = sum(calories)
+
+    """
+    Longer type of view progress solution below as comments
+    _______________________________________________________
+    # total_time = 0
+    # durations = []
+    # for workout_type, duration in workouts:
+    #     durations.append(duration)
+    #     total_time = sum(durations)
+    # total_calories_burned = sum(calories)
+    ________________________________________________________
+    """
+
+
+    if total_time <= 30:
+        return f"Keep going! You need to be more active {total_time} minutes, {total_calories_burned} calories burned"
+
+    elif total_time <= 60:
+        return f"Great Job, Yoe are keeping up the good progress {total_time} minutes, {total_calories_burned} calories burned"
+
+    else:
+        return f"Amazing effort! You are on fire today! {total_time} minutes, {total_calories_burned} calories burned"
+
+
 
 
 def reset_progress():
@@ -41,7 +68,10 @@ def reset_progress():
     Clear all data from the workouts and calories lists.
     - Print a confirmation message.
     """
-    pass
+    workouts.clear()
+    calories.clear()
+
+    return "Workout Log and Calories Log are empty!"
 
 
 def set_daily_goals(workout_minutes, calorie_limit):
@@ -82,16 +112,17 @@ def main():
 
         if choice == '1':
             # Prompt for workout type and duration
-            pass
+            print(log_workout(workout_type=input("Enter your workout type: "), duration=int(input("Enter duration time: "))))
         elif choice == '2':
             # Prompt for calories consumed
-            pass
+            print(log_calorie_intake(calories_consumed=float(input("Enter Calories consumption: "))))
         elif choice == '3':
             # Call view_progress function
-            pass
+            print(view_progress())
         elif choice == '4':
             # Call reset_progress function
-            pass
+            reset_progress()
+
         elif choice == '5':
             # Prompt for daily goals
             pass
