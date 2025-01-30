@@ -1,5 +1,12 @@
 # Personal Fitness Tracker System 🏋️‍♂️
+
+# importing libraries for the GUI
+import tkinter as tk
+from tkinter import messagebox
+
+# importing libs for the main function logic
 from functools import total_ordering
+
 
 # Lists to store fitness data
 workouts = []  # To store workout types and durations
@@ -17,6 +24,9 @@ def log_workout(workout_type, duration):
     - Append the workout type and duration to the workouts list.
     - Print a confirmation message.
     """
+    #for the GUI comments
+    # workout_type = workout_entry.get()
+    # duration = duration_entry.get()
     workouts.append((workout_type, duration))
     return "Log completed!"
 
@@ -26,6 +36,8 @@ def log_calorie_intake(calories_consumed):
     - Append the calorie amount to the calories list.
     - Print a confirmation message.
     """
+    # for the GUI comments
+    # calories_consumed = calories_entry.get()
     calories.append(calories_consumed)
     return "Log Completed!"
 
@@ -39,7 +51,7 @@ def view_progress():
     total_calories_burned = sum(calories)
 
     """
-    Longer type of view progress solution below as comments
+    Longer type of view progress solution below as a comment
     _______________________________________________________
     # total_time = 0
     # durations = []
@@ -73,7 +85,7 @@ def reset_progress():
 
     return "Workout Log and Calories Log are empty!"
 
-
+# TODO: create a daily gaol entry!
 def set_daily_goals(workout_minutes, calorie_limit):
     """
     Set daily goals for workout time and calorie intake.
@@ -82,7 +94,7 @@ def set_daily_goals(workout_minutes, calorie_limit):
     """
     pass
 
-
+# TODO: compare progress with daily goals and create encouragement messages!
 def encouragement_system():
     """
     Provide motivational feedback based on progress and goals.
@@ -134,5 +146,42 @@ def main():
             print("Invalid choice, please try again.")
 
 
+#TODO: Create a GUI for the tracker!
+
+# root = tk.Tk()
+# root.title("Fitness Tracker")
+#
+# # Workout input fields
+# tk.Label(root, text="Workout Type:").grid(row=0, column=0)
+# workout_entry = tk.Entry(root)
+# workout_entry.grid(row=0, column=1)
+#
+# tk.Label(root, text="Duration (min):").grid(row=1, column=0)
+# duration_entry = tk.Entry(root)
+# duration_entry.grid(row=1, column=1)
+#
+# tk.Button(root, text="Log Workout", command=log_workout(workout_type=input(), duration=int(input()))).grid(row=2, column=0, columnspan=2)
+#
+# # Calorie input field
+# tk.Label(root, text="Calories Consumed:").grid(row=3, column=0)
+# calories_entry = tk.Entry(root)
+# calories_entry.grid(row=3, column=1)
+#
+# tk.Button(root, text="Log Calories", command=log_calorie_intake).grid(row=4, column=0, columnspan=2)
+#
+# # Listbox to display workouts
+# tk.Label(root, text="Workout History:").grid(row=5, column=0)
+# workout_listbox = tk.Listbox(root, height=5, width=30)
+# workout_listbox.grid(row=6, column=0, columnspan=2)
+#
+# # View progress button
+# tk.Button(root, text="View Progress", command=view_progress).grid(row=7, column=0, columnspan=2)
+#
+# # Run the Tkinter event loop
+# root.mainloop()
+
+
 if __name__ == "__main__":
     main()
+
+
