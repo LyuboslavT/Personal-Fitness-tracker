@@ -36,7 +36,7 @@ Provide feedback based on whether the daily goals are met.
 
 ---
 
-✅ Additional Functions to Implement
+✅ Additional Functions Implemented
 
 log_workout
 Purpose: Add workout type and duration to the workouts list.
